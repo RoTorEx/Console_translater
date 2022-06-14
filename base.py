@@ -1,5 +1,4 @@
 import random as r
-import os
 import sys
 import time
 
@@ -20,21 +19,28 @@ class WordsDictionary:
         rus_list = excel_data_df['Russian'].tolist()
 
         while True:
-            eng_word = input("Enter English word: ").capitalize().strip()
-            rus_word = input("Enter Russian word: ").capitalize().strip()
-            eng_list.append(eng_word)
-            rus_list.append(rus_word)
+            eng_word = input("Enter\u001b[35m English\u001b[0m word: ").capitalize().strip()
+            rus_word = input("Enter\u001b[35m Russian\u001b[0m word: ").capitalize().strip()
+
+            zipped_words = zip(eng_list, rus_list)
+
+            if (eng_word, rus_word) in zipped_words:
+                print(f"Pare\u001b[31m {eng_word}\u001b[0m :\u001b[31m {rus_word}\u001b[0m already exist!")
+                continue
 
             if eng_word == '' or rus_word == '':
-                print(eng_word, type(eng_word))
-                print(rus_word, type(rus_word))
+                print("Empty fields are not added.")
                 continue
 
             elif eng_word.lower() == 'stop' or rus_word.lower() == 'stop':
                 exit()
 
+            eng_list.append(eng_word)
+            rus_list.append(rus_word)
+
             data = pd.DataFrame({"English": eng_list, "Russian": rus_list})
             data.to_excel('./words.xlsx', index=False)
+
             print(f"Added:\u001b[34m {eng_word}\u001b[0m <~>\u001b[34m {rus_word}\u001b[0m")
 
     @staticmethod
@@ -52,7 +58,8 @@ class WordsDictionary:
 
             sys.stdout.write(f"\u001b[31m{random_word}\u001b[0m :\u001b[31m {random_dict[random_word]}\u001b[0m")
             sys.stdout.flush()
-            time.sleep(3)
+            time.sleep(2)
+
             sys.stdout.write(u"\x1b[2K\u001b[1000D")  # sys.stdout.write(u"\u001b[1000D")
             sys.stdout.flush()
             time.sleep(.1)
