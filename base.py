@@ -47,22 +47,22 @@ class WordsDictionary:
     def show(*args, **kwargs):
         # xls = pd.ExcelFile(f"{os.getcwd()}/words.xlsx")
         excel_data_df = pd.read_excel("./words.xlsx")
+
         eng = excel_data_df['English'].tolist()
         rus = excel_data_df['Russian'].tolist()
-        eng_dict = {e: r for e, r in zip(eng, rus)}
-        rus_dict = {r: e for e, r in zip(eng, rus)}
+
+        words_dict = {e: r for e, r in zip(eng, rus)}
 
         while True:
-            random_dict = r.choice([eng_dict, rus_dict])
-            random_word = r.choice(list(random_dict.keys()))
+            random_eng_word = r.choice(list(words_dict.keys()))
 
-            sys.stdout.write(f"\u001b[31m{random_word}\u001b[0m :\u001b[31m {random_dict[random_word]}\u001b[0m")
+            sys.stdout.write(f"\u001b[31m{random_eng_word}\u001b[0m :\u001b[31m {words_dict[random_eng_word]}\u001b[0m")
             sys.stdout.flush()
-            time.sleep(2)
+            time.sleep(2.5)
 
             sys.stdout.write(u"\x1b[2K\u001b[1000D")  # sys.stdout.write(u"\u001b[1000D")
             sys.stdout.flush()
-            time.sleep(.1)
+            time.sleep(.2)
 
     @staticmethod
     def guess(*args, **kwargs):
