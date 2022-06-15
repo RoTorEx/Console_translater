@@ -7,30 +7,24 @@ from base import WordsDictionary
 def stop():
     process = psutil.Process(os.getpid())
     memory = process.memory_info().rss
-    print(f"\nScript used \u001b[32m {memory//1024}\u001b[0m Kb of RAM.")
 
+    print(f"\nThe script has been stopped. It used \u001b[32m {memory//1024}\u001b[0m Kb of RAM.")
     exit()
 
 
 def main():
+    # class_methods = filter(lambda meth: not meth.startswith("__"), dir(WordsDictionary))
+
     try:
         while True:
-            user_input = input("Enter num (Add, Random show or Guess words): ")
+            user_input = input("Enter preferred work type: ").lower().strip()
 
-            match user_input:
-                case "1":
-                    WordsDictionary.add()
+            try:
+                eval(f"WordsDictionary.{user_input}()")
 
-                case "2":
-                    WordsDictionary.show()
-
-                case "3":
-                    WordsDictionary.guess()
-
-                case "config":
-                    WordsDictionary.config()
-
-            print("Unsupported input, try again.")
+            except AttributeError:
+                print("Unsupported method. Сheck out the documentation and try again.")
+                continue
 
     except KeyboardInterrupt:
         stop()

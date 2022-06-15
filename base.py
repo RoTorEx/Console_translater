@@ -28,7 +28,7 @@ class WordsDictionary:
                 print(f"Pare\u001b[31m {eng_word}\u001b[0m :\u001b[31m {rus_word}\u001b[0m already exist!")
                 continue
 
-            if eng_word == '' or rus_word == '':
+            elif eng_word == '' or rus_word == '':
                 print("Empty fields are not added.")
                 continue
 
