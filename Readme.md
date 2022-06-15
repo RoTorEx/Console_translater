@@ -1,4 +1,24 @@
 # Console tranlate game
 
-Консольное словарик для тренировки английско-русский слов.
-Реализована возможность добавления, рандомного показа и режима угадывания слов.
+In translate app realize 4 methods (add, config, show, guess).
+Сhoose one of them when the application asks you to enter the type of work.
+
+
+## Add method
+
+*Add* method is activating the ability to add new pairs of English-Russian words to the excel file.
+
+
+## Config method
+
+*Config* method show size of excel file and all couples of English-Russian words.
+
+
+## Show method
+
+*Show* method starts an endless show of all couples of English-Russian words from excel file.
+
+
+## Guess method
+
+*Guess* method is activates the game where the user needs to correctly translate the suggested words.
