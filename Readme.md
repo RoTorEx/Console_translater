@@ -1,7 +1,8 @@
 # Console tranlate game
 
-In translate app realize 4 methods (add, config, show, guess).
+In translate app realize some methods (add, config, show, guess and etc.).
 Сhoose one of them when the application asks you to enter the type of work.
+To run application enter: *python3 ./main.py*.
 
 
 ## Add method
