@@ -107,7 +107,7 @@ class WordsDictionary:
                 if not line:
                     break
 
-                eng_word, rus_word = map(lambda word: word.strip(), line.split("-"))
+                eng_word, rus_word = map(lambda word: word.strip(), line.split("<>"))
                 zipped_words = zip(eng_list, rus_list)
 
                 if (eng_word, rus_word) in zipped_words:
@@ -148,4 +148,4 @@ class WordsDictionary:
                         eng_rus[lst[index - 1]] = word
 
             for k, v in eng_rus.items():
-                print(f"{k.capitalize()} - {v.capitalize()}", file=input)
+                print(f"{k.capitalize()} <> {v.capitalize()}", file=input)
