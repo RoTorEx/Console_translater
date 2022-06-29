@@ -21,6 +21,7 @@ def main():
 
             try:
                 eval(f"WordsDictionary.{user_input}()")
+                stop()
 
             except AttributeError:
                 print("Unsupported method. Сheck out the documentation and try again.")

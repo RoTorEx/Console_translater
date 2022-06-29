@@ -91,3 +91,61 @@ class WordsDictionary:
 
             else:
                 print(f"Correct translate is \u001b[31;1m{answer.capitalize()}\u001b[0m.")
+
+    @staticmethod
+    def script(*args, **kwargs):
+        excel_data_df = pd.read_excel('words.xlsx')
+        eng_list = excel_data_df['English'].tolist()
+        rus_list = excel_data_df['Russian'].tolist()
+
+        with open('input.txt', 'r') as input:
+            cnt = 0
+
+            while True:
+                line = input.readline()
+
+                if not line:
+                    break
+
+                eng_word, rus_word = map(lambda word: word.strip(), line.split("-"))
+                zipped_words = zip(eng_list, rus_list)
+
+                if (eng_word, rus_word) in zipped_words:
+                    print(f"Pare\u001b[31m {eng_word}\u001b[0m :\u001b[31m {rus_word}\u001b[0m already exist!")
+                    continue
+
+                elif eng_word == '' or rus_word == '':
+                    print("Empty fields are not added.")
+                    continue
+
+                eng_list.append(eng_word)
+                rus_list.append(rus_word)
+                cnt += 1
+
+                data = pd.DataFrame({"English": eng_list, "Russian": rus_list})
+                data.to_excel('./words.xlsx', index=False)
+
+                print(f"Added:\u001b[34m {eng_word}\u001b[0m <~>\u001b[34m {rus_word}\u001b[0m")
+            print(f"Total\u001b[35m added {cnt} new pairs\u001b[0m of words.")
+
+    @staticmethod
+    def clean(*args, **kwargs):
+        with open('words.txt', 'r') as file, open('input.txt', 'a') as input:
+            lst = []
+            eng_rus = {}
+
+            for word in file.readlines():
+                if word.strip() in lst or word == "\n" or not word:
+                    continue
+                else:
+                    lst.append(word.strip())
+
+            for index, word in enumerate(lst):
+                match index % 2:
+                    case 0:
+                        eng_rus[word] = 'None'
+                    case 1:
+                        eng_rus[lst[index - 1]] = word
+
+            for k, v in eng_rus.items():
+                print(f"{k.capitalize()} - {v.capitalize()}", file=input)
