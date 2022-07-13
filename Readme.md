@@ -1,4 +1,4 @@
-# Console tranlate game
+# Console trasnlate game
 
 In translate app realize some methods (add, config, show, guess and etc.).
 Сhoose one of them when the application asks you to enter the type of work.
